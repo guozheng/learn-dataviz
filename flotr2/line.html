@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <!-- Page Content Here -->
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <div id="chart" style="width: 600px; height: 300px;"></div>
+    <script src="lib/flotr2.min.js"></script>
+    <script>
+        var co2 = [
+        [ 1959, 315.97 ],
+        [ 1960, 316.91 ],
+        [ 1961, 317.64 ],
+        [ 1962, 318.45 ],
+        [ 1963, 320 ],
+        [ 1964, 322 ],
+        [ 1965, 333]];
+
+        var temp = [
+        [ 1959, 0.0776 ],
+        [ 1960, 0.0280 ],
+        [ 1961, 0.1028 ],
+        [ 1962, 0.1289 ],
+        [ 1963, 0.1200 ],
+        [ 1964, 0.14],
+        [ 1965, 0.1425]];
+
+        var options = {
+            title: "CO2 and temperature over time",
+            xaxis: {tickDecimals: 0},
+            y2axis: {min: 0, max: 0.2, tickFormatter: function(val) {return val + " c";}}
+        };
+
+        Flotr.draw(document.getElementById("chart"),
+            [{ data: co2, lines: {show: true}, label: "CO2 levels" },
+            { data: temp, lines: {show: true}, yaxis: 2, color: "red", label: "temperature" }],
+            options
+        );
+    </script>
+</body>
+
+</html>

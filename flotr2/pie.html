@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <!-- Page Content Here -->
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <div id="chart" style="width: 600px; height: 300px;"></div>
+    <script src="lib/flotr2.min.js"></script>
+    <script>
+        var data = [
+        [ 0, 25 ],
+        [ 1, 12.5 ],
+        [ 2, 12.5 ],
+        [ 3, 50 ]];
+
+        var options = {
+            title: "age distribution",
+            pie: {
+                show: true
+            },
+            yaxis: {
+                showLabels: false
+            },
+            xaxis: {
+                showLabels: false
+            },
+            grid: {
+                horizontalLines: false,
+                verticalLines: false
+            },
+            mouse: {
+                track: true
+            }
+        };
+
+        Flotr.draw(document.getElementById("chart"),
+            [{data: [data[0]], label: "0-20"},
+                {data: [data[1]], label: "21-40", pie: {explode: 50}},
+                {data: [data[2]], label: "41-60"},
+                {data: [data[3]], label: "61+"}],
+            options
+        );
+    </script>
+</body>
+
+</html>

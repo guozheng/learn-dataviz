@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <!-- Page Content Here -->
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <div id="chart" style="width: 600px; height: 300px;"></div>
+    <script src="lib/flotr2.min.js"></script>
+    <script>
+        var wins = [
+        [ 0, 12 ],
+        [ 1, 4 ],
+        [ 2, 20 ],
+        [ 3, 30 ]];
+        
+        var years = [
+            [0, 1959],
+            [1, 1960],
+            [2, 1961],
+            [3, 1962]
+        ];
+
+        var options = {
+            title: "soccer team wins",
+            colors: ["green"],
+            bars: {
+                show: true,
+                barWidth: 0.5
+            },
+            yaxis: {
+                min: 0,
+                tickDecimals: 0
+            },
+            xaxis: {
+                ticks: years
+            }
+        };
+
+        Flotr.draw(
+            document.getElementById("chart"),
+            [wins],
+            options
+            );
+    </script>
+</body>
+
+</html>
