@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <!-- Page Content Here -->
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <div id="chart" style="width: 600px; height: 400px;"></div>
+
+    <p>
+        <span class="sparkline">
+            170,134,115,128,168,166,122,81,56,39,97,114,114,170,134,115,128,168,166,122,81,56,39,97,114,114,170,134,115,128,168,166,122,81,56,39,97,114,114,170,134,115,128,168,166,122,81,56,39,97,114,114
+        </span>
+        <span class="sparkline-bar">
+            170,134,115,128,168,166,122,81,56,39,97,114,114,170,134,115,128,168,166,122,81,56,39,97,114,114,170,134,115,128,168,166,122,81,56,39,97,114,114,170,134,115,128,168,166,122,81,56,39,97,114,114
+        </span>
+    </p>
+    
+    <script src="lib/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"><script> -->
+    <script src="lib/jquery.flot.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script> -->
+    <script src="lib/jquery.sparkline.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script> -->
+    <script>
+        $(function() {
+            $(".sparkline")
+            .sparkline(
+                "html",
+                {
+                lineColor: "dimgray",
+                fillColor: false,
+                defaultPixelsPerValue: 4,
+                spotColor: "red",
+                minSpotColor: "red",
+                maxSpotColor: "red",
+                normalRangeMin: 82,
+                normalRangeMax: 180
+            });
+        });
+        $(function() {
+            $(".sparkline-bar")
+            .sparkline(
+                "html",
+                {
+                lineColor: "dimgray",
+                fillColor: false,
+                defaultPixelsPerValue: 4,
+                spotColor: "red",
+                minSpotColor: "red",
+                maxSpotColor: "red",
+                normalRangeMin: 82,
+                normalRangeMax: 180,
+                type: "bar"
+            });
+        });
+    </script>
+</body>
+
+</html>
