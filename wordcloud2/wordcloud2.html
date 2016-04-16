@@ -1,0 +1,36 @@
+<!DOCTYPE>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="wordcloud" style="width: 1000px; height: 600px"></div>
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <script src="lib/wordcloud2.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/wordcloud2.js/1.0.4/wordcloud2.min.js"></script> -->
+    <script>
+        // see more: https://github.com/timdream/wordcloud2.js
+        
+        window.onload = function() {
+            WordCloud(document.getElementById("wordcloud"),
+            {
+                list: [
+                    ['Java', 100],
+                    ['JavaScript', 80],
+                    ['TypeScript', 50],
+                    ['C++', 40],
+                    ['C', 40],
+                    ['Objective C', 30],
+                    ['Swift', 50],
+                    ['Scala', 70]
+                ]
+            }
+            );
+        }
+    </script>
+</body>
+
+</html>

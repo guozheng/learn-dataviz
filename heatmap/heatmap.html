@@ -1,0 +1,39 @@
+<!DOCTYPE>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <div id="heatmap" style="width: 600px; height: 300px; background-color: black"></div>
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <script src="lib/heatmap.min.js"></script>
+    <script>
+        // see more examples: https://github.com/pa7/heatmap.js
+        
+        window.onload = function() {
+            var container = document.getElementById("heatmap");
+            var heatmap = h337.create({
+                container: container
+            });
+            
+            heatmap.setData({
+                max: 5,
+                data: [
+                    {x: 10, y: 15, value: 5},
+                    {x: 100, y: 120, value: 10}
+                ]
+            });
+            
+            container.onclick = function(e) {
+                var x = e.layerX;
+                var y = e.layerY;
+                heatmap.addData({x: x, y: y, value: 15});
+            };
+        }
+    </script>
+</body>
+
+</html>
