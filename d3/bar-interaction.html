@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <title>D3.js Hello</title>
     <style media="screen" type="text/css">
+        /*rect:hover {
+            fill: mediumseagreen;
+        }*/
     </style>
 </head>
 
@@ -56,6 +59,23 @@
             })
             .attr("fill", function(d) {
                 return "rgba(0, 0, " + (d * 10) + ", 0.8)";
+            })
+            .on("mouseover", function() {
+                d3.select(this)
+                    .attr("fill", "orange")
+                    .append("title") // add tooltip
+                    .attr("id", "tooltip")
+                    .text(function(d) {
+                        return "value=" + d;
+                    });
+            })
+            .on("mouseout", function(d) {
+                d3.select(this)
+                    .transition()
+                    .duration(250)
+                    .attr("fill", "rgba(0, 0, " + (d * 10) + ", 0.8)");
+                d3.select("#tooltip")
+                    .remove(); // remove tooltip
             });
         
         svg.selectAll("text")
