@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>D3.js Hello</title>
+    <style media="screen" type="text/css">
+    </style>
+</head>
+
+<body>
+    <!-- Page Content Here -->
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <svg id="pie"></svg>
+    <svg id="force"></svg>
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+    <script>
+        // pie chart
+        var dataset = [5, 10, 20, 45, 6, 25];
+        var pieLayout = d3.layout.pie();
+        var pieW = 300;
+        var pieH = 300;
+        var outerRadius = pieW / 2;
+        var innerRadius = 0;
+        var arc = d3.svg.arc()
+                    .innerRadius(innerRadius)
+                    .outerRadius(outerRadius);
+        var pie = d3.select("#pie")
+                    .attr("width", pieW)
+                    .attr("height", pieH);
+        var arcs = pie.selectAll("g.arc")
+                    .data(pieLayout(dataset))
+                    .enter()
+                    .append("g")
+                    .attr("class", "arc")
+                    .attr("transform", "translate(" + outerRadius + ", " + outerRadius + ")");
+        var color = d3.scale.category10();
+        arcs.append("path")
+            .attr("fill", function(d, i) {
+                return color(i);
+            })
+            .attr("d", arc);
+        arcs.append("text")
+            .attr("transform", function(d) {
+                return "translate(" + arc.centroid(d) + ")";
+            })
+            .attr("text-anchor", "middle")
+            .text(function(d) {
+                return d.value;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "13px")
+            .attr("fill", "white");
+            
+        // force graph
+        var forceW = 300;
+        var forceH = 300;
+        var network = {
+            nodes: [
+                    {name: "San Jose"},
+                    {name: "San Francisco"},
+                    {name: "Mountain View"},
+                    {name: "Palo Alto"},
+                    {name: "Fremont"},
+                    {name: "Milpitas"},
+                    {name: "Sunnyvale"}
+            ],
+            edges: [
+                {source: 1, target: 0},
+                {source: 0, target: 2},
+                {source: 2, target: 3},
+                {source: 3, target: 1},
+                {source: 6, target: 5},
+                {source: 5, target: 4}
+            ]
+        };
+        var forceLayout = d3.layout.force()
+                    .nodes(network.nodes)
+                    .links(network.edges)
+                    .size([forceW, forceH])
+                    .linkDistance([50])
+                    .charge([-100])
+                    .start();
+        var force = d3.select("#force")
+                        .attr("width", forceW)
+                        .attr("height", forceH);
+        var edges = force.selectAll("line")
+                        .data(network.edges)
+                        .enter()
+                        .append("line")
+                        .style("stroke", "#ccc")
+                        .style("stroke-width", 2);
+        var nodes = force.selectAll("circle")
+                        .data(network.nodes)
+                        .enter()
+                        .append("circle")
+                        .attr("r", 10)
+                        .attr("fill", function(d, i) {
+                            return color(i);
+                        })
+                        .call(forceLayout.drag);
+        forceLayout.on("tick", function() {
+            edges.attr("x1", function(d) {
+                    return d.source.x;
+                })
+                .attr("y1", function(d) {
+                    return d.source.y;
+                })
+                .attr("x2", function(d) {
+                    return d.target.x;
+                })
+                .attr("y2", function(d) {
+                    return d.target.y;
+                });
+                
+            nodes.attr("cx", function(d) {
+                    return d.x;
+                })
+                .attr("cy", function(d) {
+                    return d.y;
+                });
+        })
+    </script>
+</body>
+</html>    
