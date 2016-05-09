@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>D3.js TWeening</title>
+    <style media="screen" type="text/css">
+    </style>
+</head>
+
+<body>
+    <!-- Page Content Here -->
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+    <script>
+        var svg = d3.select("body")
+            .append("svg")
+            .attr({
+                width: 400,
+                height: 600
+            });
+
+        var data = [
+            {x: 10, y: 10},
+            {x: 60, y: 60},
+            {x: 80, y: 20}
+        ];
+        
+        var lineGenerator = d3.svg.line()
+            .x(function(d) {
+                return d.x;
+            })
+            .y(function(d) {
+                return d.y;
+            });
+            
+        svg.append('path')
+            .datum(data)
+            .attr({
+                d: lineGenerator,
+                stroke: 'red',
+                "stroke-width": 2
+            });
+            
+        var areaGenerator = d3.svg.area()
+            .x(function(d) {
+                return d.x;
+            })
+            .y0(5)
+            .y1(function(d) {
+                return d.y;
+            });
+            
+        svg.append('path')
+            .datum(data)
+            .attr({
+                d: areaGenerator,
+                stroke: 'red',
+                "stroke-width": 2,
+                fill: 'green',
+                transform: 'translate(0, 100)'
+            });
+    </script>
+</body>
+
+</html>

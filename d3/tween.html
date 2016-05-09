@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>D3.js TWeening</title>
+    <style media="screen" type="text/css">
+    </style>
+</head>
+
+<body>
+    <!-- Page Content Here -->
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+    <script>
+        var svg = d3.select("body")
+            .append("svg")
+            .attr({
+                width: 300,
+                height: 200
+            });
+        svg.append("text")
+            .attr({
+                x: 10,
+                y: 50
+            })
+            .transition()
+            .duration(10000)
+            .tween("testtween", function() {
+                return function(t) {
+                    this.textContent = d3.interpolateRound(0, 10)(t);
+                }
+            })
+            .attrTween("fill", function() {
+                return d3.interpolate("green", "red");
+            })
+            .attrTween("font-size", function() {
+                return d3.interpolate(20, 60);
+            })
+    </script>
+</body>
+
+</html>

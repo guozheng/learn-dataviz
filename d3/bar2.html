@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>D3.js Bar chart</title>
+    <style media="screen" type="text/css">
+    </style>
+</head>
+
+<body>
+    <!-- Page Content Here -->
+    <!--[if lt IE 9]><script src="js/excanvas.min.js"></script><![endif]-->
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+    <script>
+        var url = "https://gist.githubusercontent.com/d3byex/e5ce6526ba2208014379/raw/8fefb14cc18f0440dc00248f23cbf6aec80dcc13/walking_dead_s5.json";
+        d3.json(url, function (error, resp) {
+            var data = _.map(resp, 'USViewers');
+            console.dir(data);
+            var min = d3.min(data);
+            var max = d3.max(data);
+            var graphWidth = 500;
+            var graphHeight = 300;
+            var margin = {
+                top: 10,
+                right: 10,
+                bottom: 260,
+                left: 85
+            };
+            var width = graphWidth + margin.left + margin.right;
+            var height = graphHeight + margin.top + margin.bottom;
+            var axisPadding = 3;
+            
+            var bands = d3.scale.ordinal()
+                .domain(data)
+                .rangeBands([0, graphWidth], 0.05);
+            
+            var yScale = d3.scale.linear()
+                .domain([0, max])
+                .range([0, graphHeight]);
+                
+            var colorScale = d3.scale.category20b();
+            
+            // svg element
+            var svg = d3.select('body')
+                .append('svg')
+                .attr({
+                    width: width,
+                    height: height
+                });
+            
+            // parant group for chart elements
+            var group = svg.append('g')
+                .attr({
+                    transform: 'translate(' + margin.left + ',' + margin.top + ')'
+                });
+            
+            // group for bar items: rect, text
+            var barGroup = group.selectAll('g')
+                .data(data)
+                .enter()
+                .append('g')
+                .attr('transform', function(d, i) {
+                    return 'translate(' + bands.range()[i] + ',' + (graphHeight - yScale(d)) + ')'
+                });
+            
+            barGroup.append('rect')
+                .attr({
+                    fill: function(d) {
+                        return "HotPink";
+                    },
+                    width: bands.rangeBand(),
+                    height: function(d) {
+                        return yScale(d);
+                    }
+                });
+                
+            barGroup.append('text')
+                .text(function(d) {return d;})
+                .style('text-anchor', 'start')
+                .attr({
+                    dx: 10,
+                    dy: -10,
+                    transform: 'rotate(90)',
+                    fill: 'white'
+                });
+            
+            // left axis
+            var leftAxisScale = d3.scale.linear()
+                .domain([max, 0])
+                .range([0, graphHeight]);
+            var leftAxis = d3.svg.axis()
+                .orient('left')
+                .scale(leftAxisScale);
+            var leftAxisNodes = svg.append('g')
+                .attr('transform', 'translate(' + (margin.left - axisPadding) + ',' + margin.top + ')')
+                .call(leftAxis);
+            leftAxisNodes.selectAll('.domain')
+                .attr({
+                    fill: 'none',
+                    'stroke-width': 1,
+                    stroke: 'black'
+                });
+            leftAxisNodes.selectAll('.tick line')
+                .attr({
+                    fill: 'none',
+                    'stroke-width': 1,
+                    stroke: 'black'
+                });
+                
+            // bottom axis
+            var titles = _.map(resp, 'Title');
+            console.dir(titles);
+            var bottomAxisScale = d3.scale.ordinal()
+                .domain(titles)
+                .rangeBands([axisPadding, axisPadding + graphWidth]);
+            var bottomAxis = d3.svg.axis()
+                .orient('bottom')
+                .scale(bottomAxisScale);
+            var bottomAxisNodes = svg.append('g')
+                .attr('transform', 'translate(' + (margin.left - axisPadding) + ',' + (height - margin.bottom + axisPadding) + ')')
+                .call(bottomAxis);
+            bottomAxisNodes.selectAll('.domain')
+                .attr({
+                    fill: 'none',
+                    'stroke-width': 1,
+                    stroke: 'black'
+                });
+            bottomAxisNodes.selectAll('.tick line')
+                .attr({
+                    fill: 'none',
+                    'stroke-width': 1,
+                    stroke: 'black'
+                });
+            bottomAxisNodes.selectAll('text')
+                .style('text-anchor', 'start')
+                .attr({
+                    dx: 10,
+                    dy: -5,
+                    transform: 'rotate(90)'
+                });
+        });
+        
+    </script>
+</body>
+
+</html>
