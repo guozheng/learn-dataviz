@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Google Charts: pie chart</title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+        
+            google.charts.load(
+                'current',
+                {
+                    'packages': ['corechart']
+                }
+            );
+            google.charts.setOnLoadCallback(drawChart);
+            
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Name');
+                data.addColumn('number', 'Ownership Percentage');
+                data.addRows([
+                    ['Jack', 22],
+                    ['Mark', 30],
+                    ['Eva', 25],
+                    ['Lucy', 31]
+                ]);
+                
+                var options = {
+                    'title': 'Ownership Distribution',
+                    'width': 500,
+                    'height': 300,
+                    'is3D': true,
+                    'legend': {
+                        'position': 'top'
+                    }
+                };
+                
+                var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+                
+                var chart2 = new google.visualization.BarChart(document.getElementById('barchart'));
+                chart2.draw(data, options);
+            }
+            
+        </script>
+    </head>
+    <body>
+        <div id="piechart"></div>
+        <div id="barchart"></div>
+    </body>
+</html>
