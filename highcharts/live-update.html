@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Highcharts live update</title>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    </head>
+    <body>
+    <script>
+        var chart;
+        
+        function fetchData() {
+            $.get({
+                url: 'http://www.highcharts.com/studies/live-server-data.php',
+                success: function(point) {
+                    var series = chart.series[0];
+                    var shift = (series.data.length > 20);
+                    
+                    chart.series[0].addPoint(point, true, shift);
+                    console.log(point);
+                    setTimeout(fetchData, 1000);
+                },
+                cache: false
+            });
+        };
+        
+        $(function() {
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    type: 'column',
+                    events: {
+                        load: fetchData
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true,
+                            inside: true
+                        }
+                    }
+                },
+                credits: {
+                    enabled: true,
+                    href: 'https://github.com/guozheng/learn-dataviz',
+                    text: 'guozheng'
+                },
+                title: {
+                    text: 'Live update'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    minPadding: 0.2,
+                    maxPadding: 0.2,
+                    title: {
+                        text: 'Value',
+                        margin: 80
+                    }
+                },
+                series: [{
+                    name: 'Data',
+                    data: []
+                }]
+            });
+        });
+    </script>
+    <div id="container"></div>
+    </body>
+</html>

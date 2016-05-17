@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HighCharts Line</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <!-- existing themes: https://github.com/highcharts/highcharts/tree/master/js/themes -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/4.2.5/themes/dark-unica.js"></script>
+</head>
+
+<body>
+    <script>
+        $(function() {
+            var line = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'line',
+                    type: 'line',
+                    zoomType: 'x',
+                    resetZoomButton: {
+                        position: {
+                            align: 'middle',
+                            verticalAligh: 'top',
+                            x: 0,
+                            y: -30
+                        }
+                    }
+                },
+                title: {
+                    text: 'Line with zoom'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Some Number'
+                    },
+                    tickInterval: 5
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                credits: {
+                    enabled: true,
+                    href: 'https://github.com/guozheng/learn-dataviz',
+                    text: 'guozheng'
+                },
+                tooltip: {
+                    crosshairs: [true, true]
+                },
+                series: [{
+                    name: 'Experiment Result',
+                    data: [
+                        29.9, 
+                        71.5, 
+                        106.4, 
+                        129.2, 
+                        144.0, 
+                        {
+                            y: 194.1, 
+                            marker: {
+                                fillColor: '#BD8B98',
+                                radius: 8
+                            }
+                        }, 
+                        95.6, 
+                        54.4]
+                }]
+            });
+        });
+    </script>
+    <div id="line"></div>
+</body>
+
+</html>

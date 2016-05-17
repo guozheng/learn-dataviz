@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HighCharts Line</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+</head>
+
+<body>
+    <script>
+        $(function() {
+            var scores = {
+                alex: {
+                    math: 100,
+                    science: 99,
+                    art: 85
+                },
+                john: {
+                    math: 80,
+                    science: 75,
+                    art: 100
+                }
+            };
+            
+            var column = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'column',
+                    type: 'column'
+                },
+                title: {
+                    text: 'Drilldown Student Scores'
+                },
+                credits: {
+                    enabled: true,
+                    href: 'https://github.com/guozheng/learn-dataviz',
+                    text: 'guozheng'
+                },
+                xAxis: {
+                    type: 'category'  
+                },
+                yAxis: {
+                    title: {
+                        text: 'Test Scores'
+                    },
+                    tickInterval: 10
+                },
+                series: [{
+                    name: 'Test Scores',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Alex',
+                        y: scores.alex.math + scores.alex.science + scores.alex.art,
+                        drilldown: 'alex'
+                    }, {
+                        name: 'John',
+                        y: scores.john.math + scores.john.science + scores.john.art,
+                        drilldown: 'john'
+                    }]
+                }],
+                drilldown: {
+                    series: [{
+                        id: 'alex',
+                        name: 'Alex Scores',
+                        data: [
+                            ['math', scores.alex.math],
+                            ['science', scores.alex.science],
+                            ['art', scores.alex.art]
+                        ]
+                    }, {
+                        id: 'john',
+                        name: 'John Scores',
+                        data: [
+                            ['math', scores.john.math],
+                            ['science', scores.john.science],
+                            ['art', scores.john.art]
+                        ]
+                    }]
+                }
+            });
+        });
+    </script>
+    <div id="column"></div>
+</body>
+
+</html>

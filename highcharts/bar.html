@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HighCharts Bar</title>
+    <meta name="description" content="highcharts bar chart">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <script>
+        $(function() {
+            // use jquery to select container element
+            $('#bar').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Fruit Consumption'
+                },
+                subtitle: {
+                    text: 'Bar Chart'
+                },
+                xAxis: {
+                    categories: ['Apples', 'Bananas', 'Oranges']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Fruit eaten'
+                    },
+                    tickInterval: 1
+                },
+                series: [
+                    {
+                        name: 'Jane',
+                        data: [1, 0, 4]
+                    }, 
+                    {
+                        name: 'John',
+                        data: [5, 7, 3]
+                    },
+                    {
+                        name: 'Alex',
+                        data: [2, 5, 10]
+                    }]
+            });
+            
+            // use renderTo option to select container element
+            var column = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'column',
+                    type: 'column'
+                },
+                title: {
+                    text: 'Fruit Consumption'
+                },
+                subtitle: {
+                    text: 'Column Chart'
+                },
+                xAxis: {
+                    categories: ['Apples', 'Bananas', 'Oranges']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Fruit eaten'
+                    },
+                    tickInterval: 1
+                },
+                series: [
+                    {
+                        name: 'Jane',
+                        data: [1, 0, 4]
+                    }, 
+                    {
+                        name: 'John',
+                        data: [5, 7, 3]
+                    },
+                    {
+                        name: 'Alex',
+                        data: [2, 5, 10]
+                    }  
+                ]
+            });
+            
+            var columnTime = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'columnTime',
+                    type: 'column'
+                },
+                title: {
+                    text: 'Yearly Debt'
+                },
+                xAxis: {
+                    categories: [2012, 2013, 2014, 2015]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Debut in $'
+                    },
+                    tickInterval: 1000
+                },
+                series: [
+                    {
+                        name: 'Alex',
+                        data: [1000, 3000, 5000, 10000]
+                    },
+                    {
+                        name: 'Jeff',
+                        data: [500, 1000, 2000, 8000]
+                    }
+                ]
+            });
+        });
+    </script>
+    <div id="bar"></div>
+    <div id="column"></div>
+    <div id="columnTime"></div>
+</body>
+
+</html>
