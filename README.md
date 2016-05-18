@@ -4,7 +4,7 @@ a collection of examples to learn data visualization
 # books
    * [Designing Data Visualizations, OReilly 2011](http://www.amazon.com/Designing-Data-Visualizations-Informational-Relationships/dp/1449312284/ref=sr_1_1?ie=UTF8&qid=1463504896&sr=8-1&keywords=Designing+Data+Visualizations): explains basics about data visualization, including various chart types and design tips.
    * [Data Visualization with JavaScript](http://jsdatav.is/intro.html): an online book by Stephen A. Thomas, might be a bit outdated, used several specific libraries for special areas like wordcloud, map, etc.
-   * [D3.js by Example, Packt 2015](http://www.amazon.com/D3-js-Example-Michael-Heydt/dp/1785280082/ref=sr_1_1?ie=UTF8&qid=1463505244&sr=8-1&keywords=D3.js+by+Example): learn D3 by doing projects, all examples available on (http://bl.ocks.org)[http://bl.ocks.org] 
+   * [D3.js by Example, Packt 2015](http://www.amazon.com/D3-js-Example-Michael-Heydt/dp/1785280082/ref=sr_1_1?ie=UTF8&qid=1463505244&sr=8-1&keywords=D3.js+by+Example): learn D3 by doing projects, all examples available on [http://bl.ocks.org](http://bl.ocks.org)
    * [Interactive Data Visualization for the Web, OReilly 2013](http://www.amazon.com/Interactive-Data-Visualization-Scott-Murray/dp/1449339735/ref=sr_1_1?ie=UTF8&qid=1463505135&sr=8-1&keywords=Interactive+Data+Visualization+for+the+Web): a good introduction for D3
 
 # frameworks and libraries
